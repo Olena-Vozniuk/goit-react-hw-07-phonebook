@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-// import { useEffect } from "react";
 import { deleteContact } from "redux/operations";
 import { Button, ContactWrapper } from "./ContactItem.styled";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -12,12 +11,10 @@ export const ContactItem = ({ contact }) => {
     const { id, name, phone } = contact;
     
     const handleDelete = () => {
-        console.log(id);
+        
         dispatch(deleteContact(id))
     };
 
-    //  useEffect(handleDelete, [dispatch, id]);
-    
     return (
         <ContactWrapper>
             <p>{name}: {phone}</p>
