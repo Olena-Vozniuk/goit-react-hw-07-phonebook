@@ -6,24 +6,32 @@ import { Layout } from "components/Layout/Layout";
 import { ContactForm } from "components/ContactForm/ContactForm";
 import { ContactList } from "components/ContactList/ContactList";
 import { Filter } from "components/Filter/Filter";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export const App = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-
+  
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
     <Layout>
-      <h1>Phonebook</h1>
+      {!error && <div style={{ textAlign: "center"}}>
+        <h1>Phonebook</h1>
       <ContactForm />
-      {isLoading && !error && <b>Request in progress...</b>}
       <h2>Contacts</h2>
       <Filter/>
-      <ContactList />
+        <ContactList />
+      </div>}
+      {isLoading && !error && <ClipLoader
+        size={50}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />}
+      {error && <div style={{ height: "100vh", paddingTop: "50vh", fontSize: "45px"}}>Oops...Something went wrong</div>}
     </Layout>
   );
 };

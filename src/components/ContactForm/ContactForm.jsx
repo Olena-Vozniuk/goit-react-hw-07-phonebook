@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { addContact } from "redux/operations";
 import { selectContacts  } from "redux/selectors";
 import { Input, Form, Button } from "./ContactForm.styled";
@@ -12,32 +14,44 @@ export const ContactForm = () => {
         const form = event.target;
         const newName = form.elements.name.value;
         const newPhone = form.elements.number.value;
+        const contact = {
+            name: newName,
+            phone: newPhone
+        };
         
         if (contacts.find(({ name }) => name === newName)) {
-            alert(`${newName} is already in contacts.`);
+            toast(`${newName} is already in contacts.`);
             form.reset();
             return
         }
-        dispatch(addContact(newName, newPhone));
+        dispatch(addContact(contact));
         form.reset();
     }
 
     return (
-         <Form  onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+            <span>Name</span>
             <Input
                 type="text"
                 name="name"
                 pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required />
-           
+             <span>Number</span>
             <Input
                 type="tel"
                 name="number"
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
                 required />
-            <br/>
+            <br />
+            <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          pauseOnHover
+          theme="light"
+        />
       <Button type="submit">Add contact</Button>
     </Form>
     )

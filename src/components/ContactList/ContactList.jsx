@@ -6,15 +6,17 @@ import { List, ListItem } from "./ContactList.styled";
 
 export const ContactList = () => {
     const contacts = useSelector(selectVisibleContacts);
-    
-   
-    return (    
-        <List>
+      
+    return (  
+        <div>
+        {contacts.length !== 0 && <List>
             {contacts && contacts.map( contact => (
                 <ListItem key={contact.id}>
                     <ContactItem contact={contact} />
                 </ListItem>
             ))}        
-        </List>
+            </List>}
+            {contacts.length === 0 && <p><b>Sorry, contact not found!</b></p>}
+            </div>
     );
 };
