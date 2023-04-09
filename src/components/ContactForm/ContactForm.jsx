@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { selectIsLoading } from "redux/selectors";
 import { addContact } from "redux/operations";
 import { selectContacts  } from "redux/selectors";
 import { Input, Form, Button } from "./ContactForm.styled";
 
 export const ContactForm = () => {
     const dispatch = useDispatch();
+    const isLoading = useSelector(selectIsLoading);
     const contacts = useSelector(selectContacts );
 
     const handleSubmit = event => {
@@ -26,7 +28,7 @@ export const ContactForm = () => {
         }
         dispatch(addContact(contact));
         form.reset();
-    }
+    };
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -52,7 +54,7 @@ export const ContactForm = () => {
           pauseOnHover
           theme="light"
         />
-      <Button type="submit">Add contact</Button>
+      <Button type="submit" disabled={isLoading}>Add contact</Button>
     </Form>
     )
 }

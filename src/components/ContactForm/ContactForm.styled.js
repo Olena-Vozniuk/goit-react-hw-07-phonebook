@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
 export const Input = styled.input`
+background: #dce5f2;
 display: flex;
 flex-direction: column;
 padding: 7px;
+border-radius: 3px;
 margin-bottom: 5px;
 min-width: 450px;
 gap: 7px;
@@ -22,7 +24,7 @@ padding: 20px;
 margin-bottom: 15px;
 border: 1px solid gray;
 border-radius: 5px;
-box-shadow: 1px 2px 9px 3px rgba(0,0,0,0.7);
+box-shadow: 1px 2px 9px 0px rgba(0,0,0,0.7);
 `;
 
 

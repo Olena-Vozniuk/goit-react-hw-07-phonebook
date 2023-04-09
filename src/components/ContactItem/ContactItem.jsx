@@ -10,15 +10,14 @@ export const ContactItem = ({ contact }) => {
     const isLoading = useSelector(selectIsLoading);
     const { id, name, phone } = contact;
     
-    const handleDelete = () => {
-        
+    const handleDelete = () => {       
         dispatch(deleteContact(id))
     };
 
     return (
         <ContactWrapper>
             <p>{name}: {phone}</p>
-            <Button onClick={handleDelete}>{isLoading && <ClipLoader
+            <Button type="submit" disabled={isLoading} onClick={handleDelete}>{isLoading && <ClipLoader
         size={15}
         aria-label="Loading Spinner"
         data-testid="loader"

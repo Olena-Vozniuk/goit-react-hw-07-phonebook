@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
+
 export const Wrapper = styled.main`
 color: darkblue;
-background-color: #b6deeb;
+background: #95b7ed;
+color: #081d40;
 display: flex;
 flex-direction: column;
 justify-content: center;
